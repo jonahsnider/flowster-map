@@ -348,6 +348,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@googlemaps/js-api-loader@npm:^1.11.1":
+  version: 1.12.11
+  resolution: "@googlemaps/js-api-loader@npm:1.12.11"
+  dependencies:
+    fast-deep-equal: ^3.1.3
+  checksum: bbcb6e8b2fe6755b58db16fdd8b30294f798751ff6bd685501d9882ff1e0f1cc290edd88fb162ee6d0608f149ba3ceb87703fa496828e2e853f90edaf8c05a82
+  languageName: node
+  linkType: hard
+
+"@googlemaps/react-wrapper@npm:1.1.17":
+  version: 1.1.17
+  resolution: "@googlemaps/react-wrapper@npm:1.1.17"
+  dependencies:
+    "@googlemaps/js-api-loader": ^1.11.1
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: d66298e59ecc1f220cf1ab284dca3a7c62125ba01840477f16a2bc5b1dfc4b7174a0e521c85a24c8f23a7e9e371d5cdbacb451d138f6e50aacb12d86f44e3f77
+  languageName: node
+  linkType: hard
+
+"@googlemaps/typescript-guards@npm:1.0.4":
+  version: 1.0.4
+  resolution: "@googlemaps/typescript-guards@npm:1.0.4"
+  checksum: 2041583953940970d53cd4cabe27480fc6b36d05fa59b72d084e8fde8441ca9692faa05e00a326f61fe8ed53cde42d6ce35c3471da9e39c323613c176c7fca32
+  languageName: node
+  linkType: hard
+
 "@hapi/accept@npm:5.0.2":
   version: 5.0.2
   resolution: "@hapi/accept@npm:5.0.2"
@@ -679,6 +706,13 @@ __metadata:
   version: 0.0.50
   resolution: "@types/estree@npm:0.0.50"
   checksum: 9a2b6a4a8c117f34d08fbda5e8f69b1dfb109f7d149b60b00fd7a9fb6ac545c078bc590aa4ec2f0a256d680cf72c88b3b28b60c326ee38a7bc8ee1ee95624922
+  languageName: node
+  linkType: hard
+
+"@types/google.maps@npm:3.47.2":
+  version: 3.47.2
+  resolution: "@types/google.maps@npm:3.47.2"
+  checksum: 421416b87d232d2231cdfd83dde64c71ac141d8255f1cac2718c8422bdfdc32f89eeecf86b9b4420387d354761b4eb0635a17bee0113ffbecdaef63ca5b59fd9
   languageName: node
   linkType: hard
 
@@ -2230,6 +2264,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"enhanced-resolve@npm:^5.7.0":
+  version: 5.8.3
+  resolution: "enhanced-resolve@npm:5.8.3"
+  dependencies:
+    graceful-fs: ^4.2.4
+    tapable: ^2.2.0
+  checksum: d79fbe531106448b768bb0673fb623ec0202d7ee70373ab7d4f4745d5dfe0806f38c9db7e7da8c941288fe475ab3d538db3791fce522056eeea40ca398c9e287
+  languageName: node
+  linkType: hard
+
 "enquirer@npm:^2.3.5":
   version: 2.3.6
   resolution: "enquirer@npm:2.3.6"
@@ -2954,6 +2998,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-equals@npm:2.0.4":
+  version: 2.0.4
+  resolution: "fast-equals@npm:2.0.4"
+  checksum: 1aac8a2e16b33e5e402bb5cd46be65f1ca331903c2c44e3bd75324e8472ee04f0acdbc6889e45fc28f9707ca3964f2a86789b32305d4d8b85dc97f61e446ef4b
+  languageName: node
+  linkType: hard
+
 "fast-glob@npm:^3.1.1, fast-glob@npm:^3.2.7":
   version: 3.2.7
   resolution: "fast-glob@npm:3.2.7"
@@ -3097,9 +3148,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "flowster-map@workspace:."
   dependencies:
+    "@googlemaps/react-wrapper": 1.1.17
+    "@googlemaps/typescript-guards": 1.0.4
     "@jonahsnider/prettier-config": 1.1.0
     "@jonahsnider/xo-config": 5.0.3
     "@next/eslint-plugin-next": 12.0.7
+    "@types/google.maps": 3.47.2
     "@types/node": 16.11.12
     "@types/react": 17.0.37
     eslint-config-next: 12.0.7
@@ -3107,7 +3161,10 @@ __metadata:
     eslint-plugin-prettier: 4.0.0
     eslint-plugin-react: 7.27.1
     eslint-plugin-react-hooks: 4.3.0
+    fast-equals: 2.0.4
     next: 12.0.7
+    next-compose-plugins: 2.2.1
+    next-transpile-modules: 9.0.0
     prettier: 2.5.1
     react: 17.0.2
     react-dom: 17.0.2
@@ -3391,7 +3448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.8
   resolution: "graceful-fs@npm:4.2.8"
   checksum: 5d224c8969ad0581d551dfabdb06882706b31af2561bd5e2034b4097e67cc27d05232849b8643866585fd0a41c7af152950f8776f4dd5579e9853733f31461c6
@@ -4772,6 +4829,23 @@ __metadata:
   version: 0.6.2
   resolution: "negotiator@npm:0.6.2"
   checksum: dfddaff6c06792f1c4c3809e29a427b8daef8cd437c83b08dd51d7ee11bbd1c29d9512d66b801144d6c98e910ffd8723f2432e0cbf8b18d41d2a09599c975ab3
+  languageName: node
+  linkType: hard
+
+"next-compose-plugins@npm:2.2.1":
+  version: 2.2.1
+  resolution: "next-compose-plugins@npm:2.2.1"
+  checksum: 771762fda2b12b81daf10431cbb494816cff96be02b44009692c6c0eefbacd62cbf51ddb93af8d3380ec00254c6a95d64d10f744d4b9ddadefc21efee7dc69fc
+  languageName: node
+  linkType: hard
+
+"next-transpile-modules@npm:9.0.0":
+  version: 9.0.0
+  resolution: "next-transpile-modules@npm:9.0.0"
+  dependencies:
+    enhanced-resolve: ^5.7.0
+    escalade: ^3.1.1
+  checksum: 9a5d86d80cedc2404b2b1d5bd4994f2f7bf60e5e20f24e8cc5cfec34da1418b4a439916f37a95ca336bcf6d81094c3647354ac6a0c6737b3df59e62b6380507d
   languageName: node
   linkType: hard
 
@@ -6490,6 +6564,13 @@ __metadata:
   version: 0.1.10
   resolution: "tapable@npm:0.1.10"
   checksum: fe02f5f4ce696b44c0c2d1176e41427a2fa54c2d59e80a2d16d9c8bab308c2603c3c78327a58b71e5a57abd427ddc54698736201039cc4f3d5d8b9c37b7940bb
+  languageName: node
+  linkType: hard
+
+"tapable@npm:^2.2.0":
+  version: 2.2.1
+  resolution: "tapable@npm:2.2.1"
+  checksum: 3b7a1b4d86fa940aad46d9e73d1e8739335efd4c48322cb37d073eb6f80f5281889bf0320c6d8ffcfa1a0dd5bfdbd0f9d037e252ef972aca595330538aac4d51
   languageName: node
   linkType: hard
 

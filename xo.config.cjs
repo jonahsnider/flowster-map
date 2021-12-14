@@ -16,4 +16,7 @@ config.overrides.push({
 	},
 });
 
+config.rules['import/extensions'] = 'off';
+config.rules['unicorn/filename-case'] = 'off';
+
 module.exports = config;
