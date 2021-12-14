@@ -225,3 +225,6 @@ $RECYCLE.BIN/
 # Yarn
 .yarn/*
 .pnp.*
+
+# Vercel
+.vercel
