@@ -25,14 +25,14 @@ import ContentWrapper from './ContentWrapper';
 
 const NavLink: React.FC<{href: string}> = props => (
 	<NextLink passHref href={props.href}>
-		<Link
-			as={Button}
+		<Button
+			as={Link}
 			_hover={{
 				textDecoration: 'none',
 			}}
 		>
 			{props.children}
-		</Link>
+		</Button>
 	</NextLink>
 );
 
