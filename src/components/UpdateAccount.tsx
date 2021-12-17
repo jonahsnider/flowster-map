@@ -108,7 +108,7 @@ const UpdateAccount: React.VFC = () => {
 			<form onSubmit={onSubmit}>
 				<FormControl id='update-account' w='container.sm' isInvalid={Boolean(error)}>
 					<FormLabel>Location</FormLabel>
-					<Input ref={inputRef} type='text' />
+					<Input ref={inputRef} autoFocus type='text' />
 					<FormHelperText>After submitting your location will be shuffled a bit to prevent overlapping</FormHelperText>
 					{error && <FormErrorMessage>{error}</FormErrorMessage>}
 				</FormControl>
