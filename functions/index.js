@@ -12,7 +12,7 @@ module.exports.onUserCreate = functions.auth.user().onCreate(async event => {
 			email,
 		};
 
-		await got.post(`${API_URL}/events/auth/user/on-create`, {
+		await got.post(`${API_URL}/api/events/auth/user/on-create`, {
 			json: body,
 			responseType: 'json',
 		});
