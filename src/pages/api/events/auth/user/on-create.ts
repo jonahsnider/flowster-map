@@ -1,8 +1,8 @@
 import type {NextApiHandler} from 'next';
 import {z} from 'zod';
-import * as firebase from 'firebase-admin';
 import {firestore} from 'firebase-admin';
 import {VALID_EMAIL_REGEXP} from '../../../../../config';
+import {Firebase} from '../../../../../backend/firebase';
 
 const userCreateEventSchema = z.object({
 	email: z.string().email(),
@@ -14,7 +14,7 @@ export interface ResponseBody {
 	isValid: boolean;
 }
 
-const auth = firebase.auth();
+const auth = Firebase.app.auth();
 
 const handler: NextApiHandler = async (request, response) => {
 	if (request.method !== 'POST') {
