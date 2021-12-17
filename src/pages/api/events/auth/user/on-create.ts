@@ -1,8 +1,8 @@
 import type {NextApiHandler} from 'next';
 import {z} from 'zod';
 import * as firebase from 'firebase-admin';
-import {VALID_EMAIL_REGEXP} from '../../../../../config';
 import {firestore} from 'firebase-admin';
+import {VALID_EMAIL_REGEXP} from '../../../../../config';
 
 const userCreateEventSchema = z.object({
 	email: z.string().email(),

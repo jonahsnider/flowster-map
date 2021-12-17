@@ -5,14 +5,16 @@ const got = require('got');
 const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://map.voiceflow.dev';
 
 module.exports.onUserCreate = functions.auth.user().onCreate(async event => {
-	const user = event.data;
+	const {email} = event;
 
-	const body = {
-		email: user.email,
-	};
+	if (email) {
+		const body = {
+			email,
+		};
 
-	await got.post(`${API_URL}/events/auth/user/on-create`, {
-		json: body,
-		responseType: 'json',
-	});
+		await got.post(`${API_URL}/events/auth/user/on-create`, {
+			json: body,
+			responseType: 'json',
+		});
+	}
 });
