@@ -1,4 +1,4 @@
-import {Box, Button, FormControl, FormHelperText, FormLabel, Heading, Input, useToast} from '@chakra-ui/react';
+import {Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, useToast} from '@chakra-ui/react';
 import type {DocumentReference} from 'firebase/firestore';
 import {doc, GeoPoint, setDoc} from 'firebase/firestore';
 import React from 'react';
@@ -24,6 +24,7 @@ const UpdateAccount: React.VFC = () => {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [isDisabled, setIsDisabled] = React.useState(true);
 	const [place, setPlace] = React.useState<FormValues | undefined>();
+	const [error, setError] = React.useState<string | undefined>();
 
 	React.useEffect(() => {
 		// TODO: You could fetch the previous location and use it as the bounds to improve search results
@@ -33,8 +34,18 @@ const UpdateAccount: React.VFC = () => {
 			const places = searchBox.getPlaces();
 			const place = places?.[0];
 
-			if (!place || !place.geometry?.location || !place.types?.includes('locality')) {
-				setIsDisabled(true);
+			if (!place) {
+				setError('Please enter a valid location');
+				return;
+			}
+
+			if (!place.geometry?.location) {
+				setError("That location doesn't have latitude and longitude (somehow??)");
+				return;
+			}
+
+			if (!place.types?.includes('locality')) {
+				setError('Please enter a city/town, not a specific address');
 				return;
 			}
 
@@ -43,6 +54,7 @@ const UpdateAccount: React.VFC = () => {
 				lat: place.geometry.location.lat(),
 				lng: place.geometry.location.lng(),
 			});
+			setError(undefined);
 			setIsDisabled(false);
 		});
 
@@ -94,13 +106,14 @@ const UpdateAccount: React.VFC = () => {
 			</Heading>
 
 			<form onSubmit={onSubmit}>
-				<FormControl id='update-account' w='container.sm'>
+				<FormControl id='update-account' w='container.sm' isInvalid={Boolean(error)}>
 					<FormLabel>Location</FormLabel>
 					<Input ref={inputRef} type='text' />
 					<FormHelperText>After submitting your location will be shuffled a bit to prevent overlapping</FormHelperText>
+					{error && <FormErrorMessage>{error}</FormErrorMessage>}
 				</FormControl>
 
-				<Button mt={4} colorScheme='blue' isLoading={isLoading} disabled={isDisabled} type='submit'>
+				<Button mt={4} colorScheme='blue' isLoading={isLoading} disabled={isDisabled || Boolean(error)} type='submit'>
 					Submit
 				</Button>
 			</form>
