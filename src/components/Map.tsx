@@ -17,6 +17,7 @@ const UserMap: React.FC<Props> = props => {
 	};
 
 	const shouldShowLabel = zoom > 4;
+	// TODO: Make images & text bigger when you are zoomed in more (maybe zoom > 8 ?)
 
 	const markers = props.users.map(user => (
 		<Marker

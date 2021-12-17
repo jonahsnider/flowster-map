@@ -17,6 +17,7 @@ export interface ResponseBody {
 
 const auth = Firebase.app.auth();
 
+// TODO: Add logging and figure out why this seems to never disable invalid accounts
 const handler: NextApiHandler<{isValid: boolean} | {error: string}> = async (request, response) => {
 	if (request.method !== 'POST') {
 		response.status(405);
