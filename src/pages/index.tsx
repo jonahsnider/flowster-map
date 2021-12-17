@@ -1,19 +1,39 @@
-import type {NextPage} from 'next';
-import React from 'react';
-import type {Query} from 'firebase/firestore';
-import {collection, onSnapshot, query} from 'firebase/firestore';
-import {useRouter} from 'next/router';
-import type {User} from 'firebase/auth';
-import NextLink from 'next/link';
 import {Box, Button, Center, Heading, Link} from '@chakra-ui/react';
+import type {User} from 'firebase/auth';
+import type {Query} from 'firebase/firestore';
+import {collection, doc, onSnapshot, query} from 'firebase/firestore';
+import type {NextPage} from 'next';
+import NextLink from 'next/link';
+import {useRouter} from 'next/router';
+import React from 'react';
+import type {Models} from '../backend';
 import SignInButton from '../components/AuthButton';
+import ContentWrapper from '../components/ContentWrapper';
 import AuthContext from '../contexts/AuthContext';
 import {db} from '../firebase';
-import type {Models} from '../backend';
-import ContentWrapper from '../components/ContentWrapper';
 
 const SignedIn: React.FC<{userCount: number; user: User}> = props => {
-	return (
+	const [isMissingLocation, setMissingLocation] = React.useState(false);
+
+	React.useEffect(() => {
+		const unsubscribe = onSnapshot(doc(db, 'users', props.user.uid), doc => {
+			setMissingLocation(!doc.exists());
+		});
+
+		return unsubscribe;
+	}, []);
+
+	return isMissingLocation ? (
+		<Box m={8}>
+			<Center>
+				<NextLink passHref href='/account'>
+					<Button as={Link} size='lg' colorScheme='red' _hover={{textDecoration: 'none'}}>
+						Please set your location before continuing
+					</Button>
+				</NextLink>
+			</Center>
+		</Box>
+	) : (
 		<Box>
 			<Heading mb={8}>Welcome back {props.user.displayName}</Heading>
 
