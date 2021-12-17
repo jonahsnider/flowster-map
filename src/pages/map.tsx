@@ -25,7 +25,7 @@ const UserMapPage: NextPage = () => {
 		<NeedsAuth>
 			<ContentWrapper main>
 				<Heading>Map</Heading>
-				<Text>This is a map of all the Flowsters across the globe. You can click on a marker to see more information about them.</Text>
+				<Text>This is a map of all the Flowsters across the globe. You can zoom in on a marker to see more information about them.</Text>
 			</ContentWrapper>
 
 			<Box w='100%' h='100vh'>
