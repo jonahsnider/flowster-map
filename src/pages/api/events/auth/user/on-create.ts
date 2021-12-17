@@ -2,6 +2,7 @@ import type {NextApiHandler} from 'next';
 import {z} from 'zod';
 import * as firebase from 'firebase-admin';
 import {VALID_EMAIL_REGEXP} from '../../../../../config';
+import {firestore} from 'firebase-admin';
 
 const userCreateEventSchema = z.object({
 	email: z.string().email(),
@@ -38,7 +39,8 @@ const handler: NextApiHandler = async (request, response) => {
 	if (VALID_EMAIL_REGEXP.test(body.email)) {
 		response.status(200).json({isValid: true});
 	} else {
-		await auth.deleteUser(body.id);
+		await auth.updateUser(body.id, {disabled: true});
+		await firestore().collection('users').doc(body.id).delete();
 
 		response.status(200).json({isValid: false});
 	}
