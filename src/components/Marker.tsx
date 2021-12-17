@@ -1,24 +1,32 @@
+import {Avatar, Badge, Box, Flex, Text} from '@chakra-ui/react';
 import React from 'react';
+import type {Models} from '../backend';
 
-const Marker: React.FC<google.maps.MarkerOptions> = options => {
-	const [marker, setMarker] = React.useState<google.maps.Marker>();
+interface Props {
+	user: Models.User;
+	shouldShowLabel: boolean;
 
-	React.useEffect(() => {
-		if (!marker) {
-			setMarker(new google.maps.Marker());
-		}
+	// Needed for the markers to render properly
+	/* eslint-disable react/no-unused-prop-types */
+	lat: number;
+	lng: number;
+	/* eslint-enable react/no-unused-prop-types */
+}
 
-		// Remove marker from map on unmount
-		return () => {
-			marker?.setMap(null);
-		};
-	}, [marker]);
-
-	React.useEffect(() => {
-		marker?.setOptions(options);
-	}, [marker, options]);
-
-	return null;
+const Marker: React.FC<Props> = props => {
+	return (
+		<Flex>
+			<Avatar size='sm' src={props.user.profilePictureUrl ?? undefined} name={props.user.name} />
+			<Box ml='3' role='group'>
+				<Text fontSize='xl' fontWeight='bold' visibility={props.shouldShowLabel ? 'visible' : 'hidden'}>
+					{props.user.name}
+					<Badge ml='1' colorScheme='red'>
+						{props.user.city}
+					</Badge>
+				</Text>
+			</Box>
+		</Flex>
+	);
 };
 
 export default Marker;
