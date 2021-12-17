@@ -8,7 +8,6 @@ module.exports.onUserCreate = functions.auth.user().onCreate(async event => {
 	const user = event.data;
 
 	const body = {
-		id: user.uid,
 		email: user.email,
 	};
 

@@ -6,7 +6,6 @@ import {firestore} from 'firebase-admin';
 
 const userCreateEventSchema = z.object({
 	email: z.string().email(),
-	id: z.string(),
 });
 
 type UserCreateEvent = z.infer<typeof userCreateEventSchema>;
@@ -39,8 +38,10 @@ const handler: NextApiHandler = async (request, response) => {
 	if (VALID_EMAIL_REGEXP.test(body.email)) {
 		response.status(200).json({isValid: true});
 	} else {
-		await auth.updateUser(body.id, {disabled: true});
-		await firestore().collection('users').doc(body.id).delete();
+		const user = await auth.getUserByEmail(body.email);
+
+		await auth.updateUser(user.uid, {disabled: true});
+		await firestore().collection('users').doc(user.uid).delete();
 
 		response.status(200).json({isValid: false});
 	}
