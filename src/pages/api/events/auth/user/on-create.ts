@@ -1,8 +1,9 @@
+import type firebase from 'firebase-admin';
+import {firestore} from 'firebase-admin';
 import type {NextApiHandler} from 'next';
 import {z} from 'zod';
-import {firestore} from 'firebase-admin';
-import {VALID_EMAIL_REGEXP} from '../../../../../config';
 import {Firebase} from '../../../../../backend/firebase';
+import {VALID_EMAIL_REGEXP} from '../../../../../config';
 
 const userCreateEventSchema = z.object({
 	email: z.string().email(),
@@ -16,7 +17,7 @@ export interface ResponseBody {
 
 const auth = Firebase.app.auth();
 
-const handler: NextApiHandler = async (request, response) => {
+const handler: NextApiHandler<{isValid: boolean} | {error: string}> = async (request, response) => {
 	if (request.method !== 'POST') {
 		response.status(405);
 		return;
@@ -38,7 +39,19 @@ const handler: NextApiHandler = async (request, response) => {
 	if (VALID_EMAIL_REGEXP.test(body.email)) {
 		response.status(200).json({isValid: true});
 	} else {
-		const user = await auth.getUserByEmail(body.email);
+		let user: firebase.auth.UserRecord;
+
+		try {
+			user = await auth.getUserByEmail(body.email + 'asdasd');
+		} catch (error) {
+			if (error instanceof Error && (error as Error & {code: string}).code === 'auth/user-not-found') {
+				// Don't let attackers use this route to enumerate accounts by email
+				response.status(200).json({isValid: true});
+				return;
+			}
+
+			throw error;
+		}
 
 		await auth.updateUser(user.uid, {disabled: true});
 		await firestore().collection('users').doc(user.uid).delete();
