@@ -49,10 +49,8 @@ const SignedIn: React.FC<{userCount: number; user: User}> = props => {
 };
 
 const SignedOut: React.FC<{userCount: number}> = props => {
-	const router = useRouter();
-
 	return (
-		<SignInButton colorScheme='blue' size='lg' onSuccess={async () => router.push('/map')}>
+		<SignInButton colorScheme='blue' size='lg'>
 			Sign in to view {props.userCount} Flowsters on the map
 		</SignInButton>
 	);
