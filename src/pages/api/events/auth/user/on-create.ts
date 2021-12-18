@@ -36,27 +36,28 @@ const handler: NextApiHandler<{isValid: boolean} | {error: string}> = async (req
 		throw error;
 	}
 
-	if (VALID_EMAIL_REGEXP.test(body.email)) {
-		response.status(200).json({isValid: true});
-	} else {
+	const isValid = VALID_EMAIL_REGEXP.test(body.email);
+	response.status(200).json({isValid});
+
+	if (!isValid) {
 		let user: firebase.auth.UserRecord;
 
 		try {
 			user = await auth.getUserByEmail(body.email);
 		} catch (error) {
 			if (error instanceof Error && (error as Error & {code: string}).code === 'auth/user-not-found') {
-				// Don't let attackers use this route to enumerate accounts by email
-				response.status(200).json({isValid: true});
+				// Don't let attackers use this route to enumerate accounts by email, silently continue
 				return;
 			}
 
 			throw error;
 		}
 
-		await auth.updateUser(user.uid, {disabled: true});
-		await firestore().collection('users').doc(user.uid).delete();
+		if (!user.disabled) {
+			await auth.updateUser(user.uid, {disabled: true});
+		}
 
-		response.status(200).json({isValid: false});
+		await firestore().collection('users').doc(user.uid).delete();
 	}
 };
 
