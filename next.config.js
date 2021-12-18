@@ -1,8 +1,4 @@
 const withPlugins = require('next-compose-plugins');
-const withTMFactory = require('next-transpile-modules');
-
-// TODO: Remove this plugin if it's unused
-const withTM = withTMFactory([]);
 
 const googleDomains = ['googleusercontent.com'];
 
@@ -16,4 +12,4 @@ const config = {
 	images: {domains: [...googleDomains]},
 };
 
-module.exports = withPlugins([[withTM]], config);
+module.exports = withPlugins([], config);
