@@ -17,7 +17,6 @@ export interface ResponseBody {
 
 const auth = Firebase.app.auth();
 
-// TODO: Add logging and figure out why this seems to never disable invalid accounts
 const handler: NextApiHandler<{isValid: boolean} | {error: string}> = async (request, response) => {
 	if (request.method !== 'POST') {
 		response.status(405);
@@ -43,7 +42,7 @@ const handler: NextApiHandler<{isValid: boolean} | {error: string}> = async (req
 		let user: firebase.auth.UserRecord;
 
 		try {
-			user = await auth.getUserByEmail(body.email + 'asdasd');
+			user = await auth.getUserByEmail(body.email);
 		} catch (error) {
 			if (error instanceof Error && (error as Error & {code: string}).code === 'auth/user-not-found') {
 				// Don't let attackers use this route to enumerate accounts by email
