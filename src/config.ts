@@ -6,6 +6,6 @@ export const API_KEYS = {
 	/* eslint-enable @typescript-eslint/naming-convention */
 } as const;
 
-export const API_URL = process.env.VERCEL ? `https://${process.env.VERCEL_URL!}` : 'http://localhost:3000';
+export const APP_URL = process.env.VERCEL ? `https://${process.env.VERCEL_URL!}` : 'http://localhost:3000';
 
 export const VALID_EMAIL_REGEXP = /@voiceflow\.com$/i;

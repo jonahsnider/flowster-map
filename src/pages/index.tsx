@@ -3,11 +3,13 @@ import type {User} from 'firebase/auth';
 import type {Query} from 'firebase/firestore';
 import {collection, doc, onSnapshot, query} from 'firebase/firestore';
 import type {NextPage} from 'next';
+import {NextSeo} from 'next-seo';
 import NextLink from 'next/link';
 import React from 'react';
 import type {Models} from '../backend';
 import SignInButton from '../components/AuthButton';
 import ContentWrapper from '../components/ContentWrapper';
+import {APP_URL} from '../config';
 import AuthContext from '../contexts/AuthContext';
 import {db} from '../firebase';
 
@@ -68,13 +70,17 @@ const HomePage: NextPage = () => {
 	}, []);
 
 	return (
-		<AuthContext.Consumer>
-			{user => (
-				<ContentWrapper main>
-					<Center h='container.md'>{user ? <SignedIn userCount={userCount} user={user} /> : <SignedOut userCount={userCount} />}</Center>
-				</ContentWrapper>
-			)}
-		</AuthContext.Consumer>
+		<>
+			<NextSeo titleTemplate='%s' title='Flowster Map' openGraph={{title: 'Home'}} canonical={APP_URL} />
+
+			<AuthContext.Consumer>
+				{user => (
+					<ContentWrapper main>
+						<Center h='container.md'>{user ? <SignedIn userCount={userCount} user={user} /> : <SignedOut userCount={userCount} />}</Center>
+					</ContentWrapper>
+				)}
+			</AuthContext.Consumer>
+		</>
 	);
 };
 

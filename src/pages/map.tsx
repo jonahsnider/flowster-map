@@ -2,6 +2,7 @@ import {Box, Heading, Text} from '@chakra-ui/react';
 import type {Query} from 'firebase/firestore';
 import {collection, onSnapshot, query} from 'firebase/firestore';
 import type {NextPage} from 'next';
+import { NextSeo } from 'next-seo';
 import React from 'react';
 import type {Models} from '../backend';
 import ContentWrapper from '../components/ContentWrapper';
@@ -22,16 +23,19 @@ const UserMapPage: NextPage = () => {
 	}, []);
 
 	return (
-		<NeedsAuth>
-			<ContentWrapper main>
-				<Heading>Map</Heading>
-				<Text>This is a map of all the Flowsters across the globe. You can zoom in on a marker to see more information about them.</Text>
-			</ContentWrapper>
+		<>
+			<NextSeo title='Map' openGraph={{title: 'Map'}} />
+			<NeedsAuth>
+				<ContentWrapper main>
+					<Heading>Map</Heading>
+					<Text>This is a map of all the Flowsters across the globe. You can zoom in on a marker to see more information about them.</Text>
+				</ContentWrapper>
 
-			<Box w='100%' h='100vh'>
-				<UserMap users={users} />
-			</Box>
-		</NeedsAuth>
+				<Box w='100%' h='100vh'>
+					<UserMap users={users} />
+				</Box>
+			</NeedsAuth>
+		</>
 	);
 };
 

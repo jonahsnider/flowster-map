@@ -6727,6 +6727,7 @@ __metadata:
     got: 12.0.0
     next: 12.0.7
     next-compose-plugins: 2.2.1
+    next-seo: 4.28.1
     normalize.css: 8.0.1
     prettier: 2.5.1
     react: 17.0.2
@@ -9778,6 +9779,17 @@ __metadata:
   version: 2.2.1
   resolution: "next-compose-plugins@npm:2.2.1"
   checksum: 771762fda2b12b81daf10431cbb494816cff96be02b44009692c6c0eefbacd62cbf51ddb93af8d3380ec00254c6a95d64d10f744d4b9ddadefc21efee7dc69fc
+  languageName: node
+  linkType: hard
+
+"next-seo@npm:4.28.1":
+  version: 4.28.1
+  resolution: "next-seo@npm:4.28.1"
+  peerDependencies:
+    next: ^8.1.1-canary.54 || >=9.0.0
+    react: ">=16.0.0"
+    react-dom: ">=16.0.0"
+  checksum: 4f845275b8dbe1023b983e3c243634a6d13a9f3f4fc0f0b800d4163db5d0933e473d0deca65779bcc95c249317a8e6a8c9df1fedeb531dd83ae66b9827cfa920
   languageName: node
   linkType: hard
 
