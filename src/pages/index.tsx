@@ -4,7 +4,6 @@ import type {Query} from 'firebase/firestore';
 import {collection, doc, onSnapshot, query} from 'firebase/firestore';
 import type {NextPage} from 'next';
 import NextLink from 'next/link';
-import {useRouter} from 'next/router';
 import React from 'react';
 import type {Models} from '../backend';
 import SignInButton from '../components/AuthButton';
