@@ -1,5 +1,7 @@
 # flowster-map
 
+![A screenshot of the map page](demo.png)
+
 A map of Flowsters.
 
 # TODOs
