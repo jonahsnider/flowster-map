@@ -1,4 +1,4 @@
-import {Avatar, Badge, Box, Flex, Text} from '@chakra-ui/react';
+import {Avatar, Badge, Box, Flex, LightMode, Text, useColorModeValue} from '@chakra-ui/react';
 import React from 'react';
 import type {Models} from '../backend';
 
@@ -15,17 +15,19 @@ interface Props {
 
 const Marker: React.FC<Props> = props => {
 	return (
-		<Flex>
-			<Avatar size='sm' src={props.user.profilePictureUrl ?? undefined} name={props.user.name} />
-			<Box ml='3' role='group'>
-				<Text fontSize='xl' fontWeight='bold' visibility={props.shouldShowLabel ? 'visible' : 'hidden'}>
-					{props.user.name}
-					<Badge ml='1' colorScheme='red'>
-						{props.user.city}
-					</Badge>
-				</Text>
-			</Box>
-		</Flex>
+		<LightMode>
+			<Flex>
+				<Avatar size='sm' src={props.user.profilePictureUrl ?? undefined} name={props.user.name} />
+				<Box ml='3' role='group'>
+					<Text color={useColorModeValue(undefined, 'black')} fontSize='xl' fontWeight='bold' visibility={props.shouldShowLabel ? 'visible' : 'hidden'}>
+						{props.user.name}
+						<Badge ml='1' colorScheme='red'>
+							{props.user.city}
+						</Badge>
+					</Text>
+				</Box>
+			</Flex>
+		</LightMode>
 	);
 };
 

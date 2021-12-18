@@ -2,7 +2,7 @@ import {Box, Heading, Text} from '@chakra-ui/react';
 import type {Query} from 'firebase/firestore';
 import {collection, onSnapshot, query} from 'firebase/firestore';
 import type {NextPage} from 'next';
-import { NextSeo } from 'next-seo';
+import {NextSeo} from 'next-seo';
 import React from 'react';
 import type {Models} from '../backend';
 import ContentWrapper from '../components/ContentWrapper';
